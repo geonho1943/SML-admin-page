@@ -1,26 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
-    axios.get('http://localhost:8080/chart-info/loginCountByDay')
+    axios.get('http://localhost:8080/chart-info/loginCountByMonth')
         .then(response => {
             const data = response.data;
-            const ctx = document.getElementById('loginChart').getContext('2d');
+            const ctx = document.getElementById('loginChartByMonth').getContext('2d');
             // 데이터 파싱
             const labels = data.map(item => item.ldt);
             const counts = data.map(item => item.count);
-
             // Chart.js 구성
             new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Daily Login Count',
+                        label: 'Month Login Count',
                         data: counts,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1,
                         fill: false
                     },
                     {
-                        label: 'Daily Login Count',
+                        label: 'Month Login Count',
                         data: counts,
                         // borderColor: Utils.CHART_COLORS.yellow,
                         borderColor: 'rgba(75, 192, 192, 1)',
@@ -29,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         fill: false
                     },
                     {
-                        label: 'Daily Login Count',
+                        label: 'Month Login Count',
                         data: counts,
                         // borderColor: Utils.CHART_COLORS.orange,
                         borderColor: 'rgba(255, 159, 64), 1',
@@ -52,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             },
                             title: {
                                 display: true,
-                                text: 'Date'
+                                text: 'Month'
                             }
                         },
                         y: {
