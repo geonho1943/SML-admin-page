@@ -7,5 +7,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface LogRepository extends JpaRepository<EventLog, Integer> {
-    List<EventLog> findByActiveRegBetween(LocalDateTime startTime, LocalDateTime endTime);
+    List<EventLog> findAllByActiveRegBetween(LocalDateTime startTime, LocalDateTime endTime);
 }

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    axios.get('http://localhost:8080/chart-info/loginCountByDay')
+    axios.get('http://localhost:8080/chart-info/allLoginCountByDay')
         .then(response => {
             const data = response.data;
             const ctx = document.getElementById('loginChartByDay').getContext('2d');

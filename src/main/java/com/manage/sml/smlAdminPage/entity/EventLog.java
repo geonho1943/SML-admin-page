@@ -17,14 +17,17 @@ public class EventLog {
     @Column(name = "active_type")
     private String activeType;
 
-    @Column(name = "active_log")
-    private LocalDateTime activeLog;
+    @Column(name = "active_reg")
+    private LocalDateTime activeReg;
 
-    public EventLog(long eventIdx, long userIdx, String activeType, LocalDateTime activeLog) {
+    public EventLog() {
+    }
+
+    public EventLog(long eventIdx, long userIdx, String activeType, LocalDateTime activeReg) {
         this.eventIdx = eventIdx;
         this.userIdx = userIdx;
         this.activeType = activeType;
-        this.activeLog = activeLog;
+        this.activeReg = activeReg;
     }
 
     public long getEventIdx() {
@@ -39,7 +42,7 @@ public class EventLog {
         return activeType;
     }
 
-    public LocalDateTime getActiveLog() {
-        return activeLog;
+    public LocalDateTime getActiveReg() {
+        return activeReg;
     }
 }

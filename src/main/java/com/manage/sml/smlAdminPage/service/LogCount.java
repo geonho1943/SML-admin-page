@@ -5,11 +5,12 @@ import com.manage.sml.smlAdminPage.repository.LogRepository;
 import com.manage.sml.smlAdminPage.service.user.UserLogToCountConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class LogCount {
 
     @Autowired
@@ -17,16 +18,19 @@ public class LogCount {
     @Autowired
     UserLogToCountConverter userLogToCountConverter;
 
-    @Scheduled(cron = "0 0 * * * *")
+    @Scheduled(cron = "0 0 * * * ?")
     public void arrangeForLogByHour() throws Exception {
         //매시 정각 스케줄
         //시간단위 로그의 카운트 데이터화
         LocalDateTime endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusHours(1);
-        List<EventLog> eventLogByLastHour = new ArrayList<>();
-        eventLogByLastHour = logRepository.findByActiveRegBetween(startTime, endTime);
+        List<EventLog> eventLogByLastHour;
+        eventLogByLastHour = logRepository.findAllByActiveRegBetween(startTime, endTime);
         // 1시간 로그 데이터를 active_type 기준으로 각각 카운팅
-        int login = 0, join = 0, resign = 0, block = 0;
+        int login = 0;
+        int join = 0;
+        int resign = 0;
+        int block = 0;
         for (int i = 0; i < eventLogByLastHour.size(); i++) {
             String activeType = eventLogByLastHour.get(i).getActiveType();
             switch (activeType){
@@ -39,7 +43,7 @@ public class LogCount {
                 case "user/block": block++;
                     break;
                 default:
-//                    throw new Exception("1개의 카운트되지않은 로그 idx: "+ eventLogByLastHour.get(i).getEventIdx()+"가 있음.");
+                    System.out.println("1개의 카운트되지않은 로그 idx: "+ eventLogByLastHour.get(i).getEventIdx()+"가 있음.");
                     break;
             }
         }

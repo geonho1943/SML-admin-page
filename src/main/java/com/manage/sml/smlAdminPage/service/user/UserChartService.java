@@ -3,10 +3,12 @@ package com.manage.sml.smlAdminPage.service.user;
 import com.manage.sml.smlAdminPage.entity.UserEventCount;
 import com.manage.sml.smlAdminPage.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class UserChartService {
 
     @Autowired
