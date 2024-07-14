@@ -22,7 +22,7 @@ public class UserChartController {
     public List<UserEventCount> getLoginCountInfoByHour() {
         //모든 사용자의 시간별 로그인 횟수
         LocalDateTime endTime = LocalDateTime.now();
-        LocalDateTime startTime = endTime.minusHours(24);
+        LocalDateTime startTime = endTime.minusDays(1);
         return userChartService.getLoginCountByHour(startTime, endTime);
     }
 
@@ -30,7 +30,7 @@ public class UserChartController {
     public List<UserEventCount> getJoinCountInfoByHour() {
         //모든 사용자의 시간별 회원가입 횟수
         LocalDateTime endTime = LocalDateTime.now();
-        LocalDateTime startTime = endTime.minusHours(24);
+        LocalDateTime startTime = endTime.minusDays(1);
         return userChartService.getJoinCountByHour(startTime, endTime);
     }
 
@@ -38,7 +38,7 @@ public class UserChartController {
     public List<UserEventCount> getResignCountInfoByHour() {
         //모든 사용자의 시간별 회원가입 횟수
         LocalDateTime endTime = LocalDateTime.now();
-        LocalDateTime startTime = endTime.minusHours(24);
+        LocalDateTime startTime = endTime.minusDays(1);
         return userChartService.getResignCountByHour(startTime, endTime);
     }
 
@@ -46,7 +46,7 @@ public class UserChartController {
     public List<UserEventCount> getBlockCountInfoByHour() {
         //모든 사용자의 시간별 회원가입 횟수
         LocalDateTime endTime = LocalDateTime.now();
-        LocalDateTime startTime = endTime.minusHours(24);
+        LocalDateTime startTime = endTime.minusDays(1);
         return userChartService.getBlockCountByHour(startTime, endTime);
     }
 

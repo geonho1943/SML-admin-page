@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class EventLog {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_idx")
     private long eventIdx;
 

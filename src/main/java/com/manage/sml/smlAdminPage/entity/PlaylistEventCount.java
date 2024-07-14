@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user_event_count")
-public class UserEventCount {
+@Table(name = "playlist_event_count")
+public class PlaylistEventCount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,17 +22,17 @@ public class UserEventCount {
     @Column (name = "active_count")
     private int activeCount;
 
-    public UserEventCount() {
+    public PlaylistEventCount() {
     }
 
-    public UserEventCount(int countIdx, String action, LocalDateTime chartTime, int activeCount) {
+    public PlaylistEventCount(int countIdx, String action, LocalDateTime chartTime, int activeCount) {
         this.countIdx = countIdx;
         this.action = action;
         this.chartTime = chartTime;
         this.activeCount = activeCount;
     }
 
-    public UserEventCount(String action,LocalDateTime chartTime, int activeCount) {
+    public PlaylistEventCount(String action, LocalDateTime chartTime, int activeCount) {
         this.action = action;
         this.chartTime = chartTime;
         this.activeCount = activeCount;

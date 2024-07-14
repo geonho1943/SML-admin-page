@@ -13,20 +13,19 @@ public class UserLogToCountConverter {
     @Autowired
     private UserRepository userRepository;
 
-    public void saveLoginCount(LocalDateTime endTime, int login) {
-        userRepository.save(new UserEventCount("login", endTime, login));
+    public void saveLoginCount(LocalDateTime endTime, int userLogin) {
+        userRepository.save(new UserEventCount("login", endTime, userLogin));
     }
 
-    public void saveJoinCount(LocalDateTime endTime, int join) {
-        userRepository.save(new UserEventCount("join", endTime, join));
+    public void saveJoinCount(LocalDateTime endTime, int userJoin) {
+        userRepository.save(new UserEventCount("create", endTime, userJoin));
     }
 
-    public void saveResignCount(LocalDateTime endTime, int resign) {
-        userRepository.save(new UserEventCount("resign", endTime, resign));
+    public void saveResignCount(LocalDateTime endTime, int userResign) {
+        userRepository.save(new UserEventCount("delete", endTime, userResign));
     }
 
-    public void saveBlockCount(LocalDateTime endTime, int block) {
-        userRepository.save(new UserEventCount("block", endTime, block));
+    public void saveBlockCount(LocalDateTime endTime, int userBlock) {
+        userRepository.save(new UserEventCount("deactive", endTime, userBlock));
     }
-
 }
