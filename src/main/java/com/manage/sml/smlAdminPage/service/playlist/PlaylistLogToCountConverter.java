@@ -27,7 +27,7 @@ public class PlaylistLogToCountConverter {
         playlistRepository.save(new PlaylistEventCount("delete", endTime, playlistDelete));
     }
 
-    public void saveDeactiveCount(LocalDateTime endTime, int playlistDeactive) {
-        playlistRepository.save(new PlaylistEventCount("deactive", endTime, playlistDeactive));
+    public void saveDeactivateCount(LocalDateTime endTime, int playlistDeactivate) {
+        playlistRepository.save(new PlaylistEventCount("deactivate", endTime, playlistDeactivate));
     }
 }

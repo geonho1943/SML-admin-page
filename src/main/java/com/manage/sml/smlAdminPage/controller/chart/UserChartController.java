@@ -26,15 +26,15 @@ public class UserChartController {
         return userChartService.getLoginCountByHour(startTime, endTime);
     }
 
-    @GetMapping("/allJoinCountByHour")
-    public List<UserEventCount> getJoinCountInfoByHour() {
+    @GetMapping("/allRegisterCountByHour")
+    public List<UserEventCount> getRegisterCountInfoByHour() {
         //모든 사용자의 시간별 회원가입 횟수
         LocalDateTime endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return userChartService.getJoinCountByHour(startTime, endTime);
+        return userChartService.getRegisterCountByHour(startTime, endTime);
     }
 
-    @GetMapping("/allResignCountByHour")
+    @GetMapping("/allUnregisterCountByHour")
     public List<UserEventCount> getResignCountInfoByHour() {
         //모든 사용자의 시간별 회원가입 횟수
         LocalDateTime endTime = LocalDateTime.now();
@@ -42,12 +42,12 @@ public class UserChartController {
         return userChartService.getResignCountByHour(startTime, endTime);
     }
 
-    @GetMapping("/allBlockCountByHour")
+    @GetMapping("/allDeactivateCountByHour")
     public List<UserEventCount> getBlockCountInfoByHour() {
         //모든 사용자의 시간별 회원가입 횟수
         LocalDateTime endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return userChartService.getBlockCountByHour(startTime, endTime);
+        return userChartService.getdeactiveCountByHour(startTime, endTime);
     }
 
 }

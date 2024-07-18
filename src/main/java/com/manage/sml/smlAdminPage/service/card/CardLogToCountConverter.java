@@ -26,7 +26,7 @@ public class CardLogToCountConverter {
         cardRepository.save(new CardEventCount("delete", endTime, cardDelete));
     }
 
-    public void saveDeactiveCount(LocalDateTime endTime, int cardDeactive) {
-        cardRepository.save(new CardEventCount("deactive", endTime, cardDeactive));
+    public void saveDeactivateCount(LocalDateTime endTime, int cardDeactivate) {
+        cardRepository.save(new CardEventCount("deactivate", endTime, cardDeactivate));
     }
 }

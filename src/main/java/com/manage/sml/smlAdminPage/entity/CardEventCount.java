@@ -38,4 +38,19 @@ public class CardEventCount {
         this.activeCount = activeCount;
     }
 
+    public int getCountIdx() {
+        return countIdx;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public LocalDateTime getChartTime() {
+        return chartTime;
+    }
+
+    public int getActiveCount() {
+        return activeCount;
+    }
 }

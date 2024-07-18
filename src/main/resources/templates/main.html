@@ -6,19 +6,22 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0"></script>
-    <script src="js/userChartByDay.js"></script>
     <script src="js/userChartByHour.js"></script>
-    <script src="js/userChartByMonth.js"></script>
+    <script src="js/cardChartByHour.js"></script>
+    <script src="js/playlistChartByHour.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </head>
 <body>
 <h1>관리자 페이지</h1>
 <h2>시각화 자료 검색</h2>
+<p>user 멀티라인(4) 차트- 24시간</p>
+<canvas id="userChartByHour"></canvas>
+<p>card 멀티라인(4) 차트- 24시간</p>
+<canvas id="cardChartByHour"></canvas>
+<p>playlist 멀티라인(4) 차트- 24시간</p>
+<canvas id="playlistChartByHour"></canvas>
+
 <h2>로그 관리</h2>
-<p>test chart data list 보기</p>
-<canvas id="loginChartByHour" width="984" height="492"></canvas>
-<canvas id="loginChartByDay" width="984" height="492"></canvas>
-<canvas id="loginChartByMonth" width="984" height="492"></canvas>
 </body>
 </html>

@@ -31,9 +31,9 @@ public class DummyDataGenerator {
         LocalDateTime startTime = endTime.minusMonths(1);
 
         String[] eventTypes = {
-            "user/login", "user/join", "user/resign", "user/block",
-            "card/check", "card/create", "card/delete", "card/deactive",
-            "playlist/check", "playlist/create", "playlist/delete", "playlist/deactive"
+            "user/login", "user/register", "user/unregister", "user/deactivate",
+            "card/check", "card/create", "card/delete", "card/deactivate",
+            "playlist/check", "playlist/create", "playlist/delete", "playlist/deactivate"
         };
 
         LocalDateTime currentHour = startTime.truncatedTo(ChronoUnit.HOURS);
@@ -59,24 +59,24 @@ public class DummyDataGenerator {
         }
 
         // 도메인별 카운트 저장
-        saveOrUpdateCounts(endTime, eventTypeCounts);
+        saveCounts(endTime, eventTypeCounts);
     }
 
-    private void saveOrUpdateCounts(LocalDateTime time, Map<String, Integer> eventTypeCounts) {
+    private void saveCounts(LocalDateTime time, Map<String, Integer> eventTypeCounts) {
         // 도메인별 카운트 저장
         userLogToCountConverter.saveLoginCount(time, eventTypeCounts.get("user/login"));
-        userLogToCountConverter.saveJoinCount(time, eventTypeCounts.get("user/join"));
-        userLogToCountConverter.saveResignCount(time, eventTypeCounts.get("user/resign"));
-        userLogToCountConverter.saveBlockCount(time, eventTypeCounts.get("user/block"));
+        userLogToCountConverter.saveRegisterCount(time, eventTypeCounts.get("user/register"));
+        userLogToCountConverter.saveUnregisterCount(time, eventTypeCounts.get("user/unregister"));
+        userLogToCountConverter.saveDeactivateCount(time, eventTypeCounts.get("user/deactivate"));
         //Card-
         cardLogToCountConverter.saveCheckCount(time, eventTypeCounts.get("card/check"));
         cardLogToCountConverter.saveCreateCount(time, eventTypeCounts.get("card/create"));
         cardLogToCountConverter.saveDeleteCount(time, eventTypeCounts.get("card/delete"));
-        cardLogToCountConverter.saveDeactiveCount(time, eventTypeCounts.get("card/deactive"));
+        cardLogToCountConverter.saveDeactivateCount(time, eventTypeCounts.get("card/deactivate"));
         //Playlist
         playlistLogToCountConverter.saveCheckCount(time, eventTypeCounts.get("playlist/check"));
         playlistLogToCountConverter.saveCreateCount(time, eventTypeCounts.get("playlist/create"));
         playlistLogToCountConverter.saveDeleteCount(time, eventTypeCounts.get("playlist/delete"));
-        playlistLogToCountConverter.saveDeactiveCount(time, eventTypeCounts.get("playlist/deactive"));
+        playlistLogToCountConverter.saveDeactivateCount(time, eventTypeCounts.get("playlist/deactivate"));
     }
 }

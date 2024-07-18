@@ -34,29 +34,29 @@ public class LogCount {
         eventLogByLastHour = logRepository.findAllByActiveRegBetween(startTime, endTime);
         // 1시간 로그 데이터를 active_type 기준으로 각각 카운팅
         int userLogin = 0;
-        int userJoin = 0;
-        int userResign = 0;
-        int userBlock = 0;
+        int userRegister = 0;
+        int userUnregister = 0;
+        int userDeactivate = 0;
 
         int cardCheck = 0;
         int cardCreate = 0;
         int cardDelete = 0;
-        int cardDeactive = 0;
+        int cardDeactivate = 0;
 
         int playlistCheck = 0;
         int playlistCreate = 0;
         int playlistDelete = 0;
-        int playlistDeactive = 0;
+        int playlistDeactivate = 0;
         for (int i = 0; i < eventLogByLastHour.size(); i++) {
             String activeType = eventLogByLastHour.get(i).getActiveType();
             switch (activeType){
                 case "user/login": userLogin++;
                     break;
-                case "user/join": userJoin++;
+                case "user/join": userRegister++;
                     break;
-                case "user/resign": userResign++;
+                case "user/resign": userUnregister++;
                     break;
-                case "user/block": userBlock++;
+                case "user/block": userDeactivate++;
                     break;
                 case "card/check": cardCheck++;
                     break;
@@ -64,7 +64,7 @@ public class LogCount {
                     break;
                 case "card/delete": cardDelete++;
                     break;
-                case "card/deactive": cardDeactive++;
+                case "card/deactivate": cardDeactivate++;
                     break;
                 case "playlist/check": playlistCheck++;
                     break;
@@ -72,7 +72,7 @@ public class LogCount {
                     break;
                 case "playlist/delete": playlistDelete++;
                     break;
-                case "playlist/deactive": playlistDeactive++;
+                case "playlist/deactivate": playlistDeactivate++;
                     break;
                 default:
                     System.out.println("1개의 카운트되지않은 로그 idx: " + eventLogByLastHour.get(i).getEventIdx() + "가 있음.");
@@ -81,19 +81,19 @@ public class LogCount {
         }
         // 도메인별 카운트 저장
         userLogToCountConverter.saveLoginCount(endTime, userLogin);
-        userLogToCountConverter.saveJoinCount(endTime, userJoin);
-        userLogToCountConverter.saveResignCount(endTime, userResign);
-        userLogToCountConverter.saveBlockCount(endTime, userBlock);
+        userLogToCountConverter.saveRegisterCount(endTime, userRegister);
+        userLogToCountConverter.saveUnregisterCount(endTime, userUnregister);
+        userLogToCountConverter.saveDeactivateCount(endTime, userDeactivate);
         //Card-
         cardLogToCountConverter.saveCheckCount(endTime, cardCheck);
         cardLogToCountConverter.saveCreateCount(endTime, cardCreate);
         cardLogToCountConverter.saveDeleteCount(endTime, cardDelete);
-        cardLogToCountConverter.saveDeactiveCount(endTime, cardDeactive);
+        cardLogToCountConverter.saveDeactivateCount(endTime, cardDeactivate);
         //Playlist
         playlistLogToCountConverter.saveCheckCount(endTime, playlistCheck);
         playlistLogToCountConverter.saveCreateCount(endTime, playlistCreate);
         playlistLogToCountConverter.saveDeleteCount(endTime, playlistDelete);
-        playlistLogToCountConverter.saveDeactiveCount(endTime, playlistDeactive);
+        playlistLogToCountConverter.saveDeactivateCount(endTime, playlistDeactivate);
 
     }
 

@@ -18,16 +18,16 @@ public class UserChartService {
         return userRepository.findByActionAndChartTimeBetween("login", startTime, endTime);
     }
 
-    public List<UserEventCount> getJoinCountByHour(LocalDateTime startTime, LocalDateTime endTime) {
-        return userRepository.findByActionAndChartTimeBetween("join", startTime, endTime);
+    public List<UserEventCount> getRegisterCountByHour(LocalDateTime startTime, LocalDateTime endTime) {
+        return userRepository.findByActionAndChartTimeBetween("register", startTime, endTime);
     }
 
     public List<UserEventCount> getResignCountByHour(LocalDateTime startTime, LocalDateTime endTime) {
-        return userRepository.findByActionAndChartTimeBetween("resign", startTime, endTime);
+        return userRepository.findByActionAndChartTimeBetween("unregister", startTime, endTime);
     }
 
-    public List<UserEventCount> getBlockCountByHour(LocalDateTime startTime, LocalDateTime endTime) {
-        return userRepository.findByActionAndChartTimeBetween("Block", startTime, endTime);
+    public List<UserEventCount> getdeactiveCountByHour(LocalDateTime startTime, LocalDateTime endTime) {
+        return userRepository.findByActionAndChartTimeBetween("deactivate", startTime, endTime);
     }
 
 }
