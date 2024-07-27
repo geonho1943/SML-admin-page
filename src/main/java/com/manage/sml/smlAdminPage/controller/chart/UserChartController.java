@@ -16,40 +16,76 @@ public class UserChartController {
     @Autowired
     UserChartService userChartService;
 
-    @GetMapping("/login-count/hour")
-    public List<UserEventCount> getLoginCountInfoByHour(
+    @GetMapping("/login-count/day")
+    public List<UserEventCount> getLoginCountInfoByDay(
             @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return userChartService.getLoginCountByHour(startTime, endTime);
+        return userChartService.getUserCountByDay("login", startTime, endTime);
     }
 
-    @GetMapping("/register-count/hour")
-    public List<UserEventCount> getRegisterCountInfoByHour(
+    @GetMapping("/register-count/day")
+    public List<UserEventCount> getRegisterCountInfoByDay(
             @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return userChartService.getRegisterCountByHour(startTime, endTime);
+        return userChartService.getUserCountByDay("register", startTime, endTime);
     }
 
-    @GetMapping("/unregister-count/hour")
-    public List<UserEventCount> getResignCountInfoByHour(
+    @GetMapping("/unregister-count/day")
+    public List<UserEventCount> getResignCountInfoByDay(
             @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return userChartService.getResignCountByHour(startTime, endTime);
+        return userChartService.getUserCountByDay("unregister", startTime, endTime);
     }
 
-    @GetMapping("/deactive-count/hour")
-    public List<UserEventCount> getBlockCountInfoByHour(
+    @GetMapping("/deactivate-count/day")
+    public List<UserEventCount> getBlockCountInfoByDay(
             @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return userChartService.getdeactiveCountByHour(startTime, endTime);
+        return userChartService.getUserCountByDay("deactivate", startTime, endTime);
+    }
+
+    @GetMapping("/login-count/week")
+    public List<UserEventCount> getLoginCountInfoByWeek(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusWeeks(1);
+        return userChartService.getUserCountByWeek("login", startTime, endTime);
+    }
+
+    @GetMapping("/register-count/week")
+    public List<UserEventCount> getRegisterCountInfoByWeek(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusWeeks(1);
+        return userChartService.getUserCountByWeek("register", startTime, endTime);
+    }
+
+    @GetMapping("/unregister-count/week")
+    public List<UserEventCount> getUnregisterCountInfoByWeek(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusWeeks(1);
+        return userChartService.getUserCountByWeek("unregister", startTime, endTime);
+    }
+
+    @GetMapping("/deactivate-count/week")
+    public List<UserEventCount> getBlockCountInfoByWeek(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusWeeks(1);
+        return userChartService.getUserCountByWeek("deactivate", startTime, endTime);
     }
 
 }

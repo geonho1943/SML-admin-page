@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     // axios 요청들을 병렬로 처리하여 모든 데이터를 가져옴
     axios.all([
-        axios.get('http://localhost:8080/chart-info/allCardCheckCountByHour'),
-        axios.get('http://localhost:8080/chart-info/allCardCreateCountByHour'),
-        axios.get('http://localhost:8080/chart-info/allCardDeleteCountByHour'),
-        axios.get('http://localhost:8080/chart-info/allCardDeactivateCountByHour')
+        axios.get('http://localhost:8080/api/chart/cards/check-count/day'),
+        axios.get('http://localhost:8080/api/chart/cards/create-count/day'),
+        axios.get('http://localhost:8080/api/chart/cards/delete-count/day'),
+        axios.get('http://localhost:8080/api/chart/cards/deactivate-count/day')
     ])
     .then(axios.spread((checkResponse, createResponse, deleteResponse, deactivateResponse) => {
         // 각 API에서 받은 데이터를 변수에 저장
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const deactivateCounts = deactivateData.map(item => item.activeCount);
 
         // Chart.js 구성
-        const ctx = document.getElementById('cardChartByHour').getContext('2d');
+        const ctx = document.getElementById('cardChartByDay').getContext('2d');
         new Chart(ctx, {
             type: 'line',
             data: {

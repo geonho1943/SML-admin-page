@@ -3,25 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>SML 관리자페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0"></script>
-    <script src="js/userChartByHour.js"></script>
-    <script src="js/cardChartByHour.js"></script>
-    <script src="js/playlistChartByHour.js"></script>
+    <script src="js/userChartByDay.js"></script>
+    <script src="js/cardChartByDay.js"></script>
+    <script src="js/playlistChartByDay.js"></script>
+    <script src="js/userChartByWeek.js"></script>
+    <script src="js/cardChartByWeek.js"></script>
+    <script src="js/playlistChartByWeek.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 </head>
-<body>
-<h1>관리자 페이지</h1>
-<h2>시각화 자료 검색</h2>
-<p>user 멀티라인(4) 차트- 24시간</p>
-<canvas id="userChartByHour"></canvas>
-<p>card 멀티라인(4) 차트- 24시간</p>
-<canvas id="cardChartByHour"></canvas>
-<p>playlist 멀티라인(4) 차트- 24시간</p>
-<canvas id="playlistChartByHour"></canvas>
+<body data-bs-theme="dark">
+<div class="container" >
+    <h2 class="text-center">SML admin page</h2>
+    <h4 class="my-4">일일 차트</h4>
+    <div class="row">
+        <div class="col-4 mb-4">
+            <canvas id="userChartByDay"></canvas>
+        </div>
+        <div class="col-4 mb-4">
+            <canvas id="cardChartByDay"></canvas>
+        </div>
+        <div class="col-4 mb-4">
+            <canvas id="playlistChartByDay"></canvas>
+        </div>
+    </div>
+    <h4 class="my-4">주간 차트</h4>
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+    <canvas id="userChartByWeek"></canvas>
+    <canvas id="cardChartByWeek"></canvas>
+    <canvas id="playlistChartByWeek"></canvas>
+    </div>
 
-<h2>로그 관리</h2>
+</div>
 </body>
 </html>

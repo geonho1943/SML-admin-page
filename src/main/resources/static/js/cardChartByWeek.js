@@ -1,62 +1,61 @@
 document.addEventListener('DOMContentLoaded', function () {
     // axios 요청들을 병렬로 처리하여 모든 데이터를 가져옴
     axios.all([
-        axios.get('http://localhost:8080/chart-info/allLoginCountByHour'),
-        axios.get('http://localhost:8080/chart-info/allRegisterCountByHour'),
-        axios.get('http://localhost:8080/chart-info/allUnregisterCountByHour'),
-        axios.get('http://localhost:8080/chart-info/allDeactivateCountByHour')
+        axios.get('http://localhost:8080/api/chart/cards/check-count/week'),
+        axios.get('http://localhost:8080/api/chart/cards/create-count/week'),
+        axios.get('http://localhost:8080/api/chart/cards/delete-count/week'),
+        axios.get('http://localhost:8080/api/chart/cards/deactivate-count/week')
     ])
-    .then(axios.spread((loginResponse, registerResponse, unregisterResponse, deactivateResponse) => {
+    .then(axios.spread((checkResponse, createResponse, deleteResponse, deactivateResponse) => {
         // 각 API에서 받은 데이터를 변수에 저장
-        const loginData = loginResponse.data;
-        const registerData = registerResponse.data;
-        const unregisterData = unregisterResponse.data;
+        const checkData = checkResponse.data;
+        const createData = createResponse.data;
+        const deleteData = deleteResponse.data;
         const deactivateData = deactivateResponse.data;
 
         // 데이터를 시간 순서대로 정렬
-        loginData.sort((a, b) => new Date(a.chartTime) - new Date(b.chartTime));
-        registerData.sort((a, b) => new Date(a.chartTime) - new Date(b.chartTime));
-        unregisterData.sort((a, b) => new Date(a.chartTime) - new Date(b.chartTime));
+        checkData.sort((a, b) => new Date(a.chartTime) - new Date(b.chartTime));
+        createData.sort((a, b) => new Date(a.chartTime) - new Date(b.chartTime));
+        deleteData.sort((a, b) => new Date(a.chartTime) - new Date(b.chartTime));
         deactivateData.sort((a, b) => new Date(a.chartTime) - new Date(b.chartTime));
 
-
-        const labels = loginData.map(item => item.chartTime);
-
-        const loginCounts = loginData.map(item => item.activeCount);
-        const registerCounts = registerData.map(item => item.activeCount);
-        const unregisterCounts = unregisterData.map(item => item.activeCount);
+        // 각 데이터에서 labels와 counts를 추출
+        const labels = checkData.map(item => item.chartTime); // x축 라벨은 checkData 기준으로 설정
+        const checkCounts = checkData.map(item => item.activeCount);
+        const createCounts = createData.map(item => item.activeCount);
+        const deleteCounts = deleteData.map(item => item.activeCount);
         const deactivateCounts = deactivateData.map(item => item.activeCount);
 
         // Chart.js 구성
-        const ctx = document.getElementById('userChartByHour').getContext('2d');
+        const ctx = document.getElementById('cardChartByWeek').getContext('2d');
         new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Login',
+                        label: 'Create',
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
-                        data: loginCounts,
+                        data: checkCounts,
                         borderWidth: 1,
                         tension: 0.3,
                         fill: false
                     },
                     {
-                        label: 'Register',
+                        label: 'Check',
                         backgroundColor: 'rgba(192, 75, 192, 0.2)',
                         borderColor: 'rgba(192, 75, 192, 1)',
-                        data: registerCounts,
+                        data: createCounts,
                         borderWidth: 1,
                         tension: 0.3,
                         fill: false
                     },
                     {
-                        label: 'Unregister',
+                        label: 'Delete',
                         backgroundColor: 'rgba(192, 192, 75, 0.2)',
                         borderColor: 'rgba(192, 192, 75, 1)',
-                        data: unregisterCounts,
+                        data: deleteCounts,
                         borderWidth: 1,
                         tension: 0.3,
                         fill: false
@@ -81,12 +80,12 @@ document.addEventListener('DOMContentLoaded', function () {
                             unit: 'hour',
                             tooltipFormat: 'YYYY-MM-DDTHH:mm',
                             displayFormats: {
-                                hour: 'HH:mm'
+                                hour: 'MM:DD'
                             }
                         },
                         title: {
                             display: true,
-                            text: '24 Hour'
+                            text: 'week'
                         },
                         ticks: {
                             source: 'data',
@@ -96,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     y: {
                         title: {
                             display: true,
-                            text: 'User'
+                            text: 'Card'
                         },
                         beginAtZero: true
                     }
