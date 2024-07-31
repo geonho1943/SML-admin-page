@@ -1,7 +1,6 @@
 package com.manage.sml.smlAdminPage.service.user;
 
 import com.manage.sml.smlAdminPage.entity.UserEventCount;
-import com.manage.sml.smlAdminPage.entity.UserEventCount;
 import com.manage.sml.smlAdminPage.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +15,11 @@ public class UserChartService {
     @Autowired
     UserRepository userRepository;
 
-    public List<UserEventCount> getUserCountByDay(String action, LocalDateTime startTime, LocalDateTime endTime) {
+    public List<UserEventCount> getUserCountByHour(String action, LocalDateTime startTime, LocalDateTime endTime) {
         return userRepository.findByActionAndChartTimeBetween("register", startTime, endTime);
     }
 
-    public List<UserEventCount> getUserCountByWeek(String action, LocalDateTime startTime, LocalDateTime endTime) {
+    public List<UserEventCount> getUserCountByDay(String action, LocalDateTime startTime, LocalDateTime endTime) {
         List<UserEventCount> actionDataByHour = userRepository.findByActionAndChartTimeBetween(action , startTime, endTime);
 
         //date 기준 count 누적합데이터를 Map으로 생성

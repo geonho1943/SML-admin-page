@@ -25,7 +25,7 @@ public class CardChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return cardChartService.getCardCountByDay("check", startTime, endTime);
+        return cardChartService.getCardCountByHour("check", startTime, endTime);
     }
 
     @GetMapping("/create-count/day")
@@ -34,7 +34,7 @@ public class CardChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return cardChartService.getCardCountByDay("create", startTime, endTime);
+        return cardChartService.getCardCountByHour("create", startTime, endTime);
     }
 
     @GetMapping("/delete-count/day")
@@ -43,7 +43,7 @@ public class CardChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return cardChartService.getCardCountByDay("delete", startTime, endTime);
+        return cardChartService.getCardCountByHour("delete", startTime, endTime);
     }
 
     @GetMapping("/deactivate-count/day")
@@ -52,7 +52,7 @@ public class CardChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return cardChartService.getCardCountByDay("deactivate", startTime, endTime);
+        return cardChartService.getCardCountByHour("deactivate", startTime, endTime);
     }
 
     @GetMapping("/check-count/week")
@@ -61,7 +61,7 @@ public class CardChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return cardChartService.getCardCountByWeek("check",startTime, endTime);
+        return cardChartService.getCardCountByDay("check",startTime, endTime);
     }
 
     @GetMapping("/create-count/week")
@@ -70,7 +70,7 @@ public class CardChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return cardChartService.getCardCountByWeek("create",startTime, endTime);
+        return cardChartService.getCardCountByDay("create",startTime, endTime);
     }
 
     @GetMapping("/delete-count/week")
@@ -79,7 +79,7 @@ public class CardChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return cardChartService.getCardCountByWeek("delete",startTime, endTime);
+        return cardChartService.getCardCountByDay("delete",startTime, endTime);
     }
 
     @GetMapping("/deactivate-count/week")
@@ -88,7 +88,43 @@ public class CardChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return cardChartService.getCardCountByWeek("deactivate",startTime, endTime);
+        return cardChartService.getCardCountByDay("deactivate",startTime, endTime);
+    }
+
+    @GetMapping("/check-count/month")
+    public List<CardEventCount> getCheckCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return cardChartService.getCardCountByDay("check", startTime, endTime);
+    }
+
+    @GetMapping("/create-count/month")
+    public List<CardEventCount> getCreateCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return cardChartService.getCardCountByDay("create", startTime, endTime);
+    }
+
+    @GetMapping("/delete-count/month")
+    public List<CardEventCount> getDeleteCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return cardChartService.getCardCountByDay("delete", startTime, endTime);
+    }
+
+    @GetMapping("/deactivate-count/month")
+    public List<CardEventCount> getDeactivateCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return cardChartService.getCardCountByDay("deactivate", startTime, endTime);
     }
 
 }

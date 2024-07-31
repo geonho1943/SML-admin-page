@@ -15,35 +15,52 @@
     <script src="js/userChartByWeek.js"></script>
     <script src="js/cardChartByWeek.js"></script>
     <script src="js/playlistChartByWeek.js"></script>
+    <script src="js/userChartByMonth.js"></script>
+    <script src="js/cardChartByMonth.js"></script>
+    <script src="js/playlistChartByMonth.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<body data-bs-theme="dark">
-<div class="container" >
+<body>
+<!--data-bs-theme="dark"-->
+<div class="container">
     <h2 class="text-center">SML admin page</h2>
-    <h4 class="my-4">일일 차트</h4>
-    <div class="row">
-        <div class="col-4 mb-4">
-            <canvas id="userChartByDay"></canvas>
-        </div>
-        <div class="col-4 mb-4">
-            <canvas id="cardChartByDay"></canvas>
-        </div>
-        <div class="col-4 mb-4">
-            <canvas id="playlistChartByDay"></canvas>
-        </div>
-    </div>
     <h4 class="my-4">주간 차트</h4>
     <div class="row">
         <div class="col-4">
+            <canvas id="userChartByWeek"></canvas>
         </div>
         <div class="col-4">
+            <canvas id="cardChartByWeek"></canvas>
         </div>
         <div class="col-4">
+            <canvas id="playlistChartByWeek"></canvas>
         </div>
     </div>
-    <canvas id="userChartByWeek"></canvas>
-    <canvas id="cardChartByWeek"></canvas>
-    <canvas id="playlistChartByWeek"></canvas>
+
+    <h4 class="my-4">일일 차트</h4>
+    <div class="row">
+        <div class="col-4">
+            <canvas id="userChartByDay"></canvas>
+        </div>
+        <div class="col-4">
+            <canvas id="cardChartByDay"></canvas>
+        </div>
+        <div class="col-4">
+            <canvas id="playlistChartByDay"></canvas>
+        </div>
+    </div>
+
+    <h4 class="my-4">월간 차트</h4>
+    <div class="row">
+        <div class="col-6">
+            <canvas id="userChartByMonth"></canvas>
+        </div>
+        <div class="col-6">
+            <canvas id="cardChartByMonth"></canvas>
+        </div>
+        <div class="col-6">
+            <canvas id="playlistChartByMonth"></canvas>
+        </div>
     </div>
 
 </div>

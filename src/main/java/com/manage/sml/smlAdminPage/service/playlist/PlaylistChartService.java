@@ -1,7 +1,6 @@
 package com.manage.sml.smlAdminPage.service.playlist;
 
 import com.manage.sml.smlAdminPage.entity.PlaylistEventCount;
-import com.manage.sml.smlAdminPage.entity.PlaylistEventCount;
 import com.manage.sml.smlAdminPage.repository.PlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +15,11 @@ public class PlaylistChartService {
     @Autowired
     private PlaylistRepository playlistRepository;
 
-    public List<PlaylistEventCount> getPlaylistCountByDay(String action, LocalDateTime startTime, LocalDateTime endTime) {
+    public List<PlaylistEventCount> getPlaylistCountByHour(String action, LocalDateTime startTime, LocalDateTime endTime) {
         return playlistRepository.findByActionAndChartTimeBetween(action , startTime, endTime);
     }
 
-    public List<PlaylistEventCount> getPlaylistCountByWeek(String action, LocalDateTime startTime, LocalDateTime endTime) {
+    public List<PlaylistEventCount> getPlaylistCountByDay(String action, LocalDateTime startTime, LocalDateTime endTime) {
 
         List<PlaylistEventCount> actionDataByHour = playlistRepository.findByActionAndChartTimeBetween(action , startTime, endTime);
 

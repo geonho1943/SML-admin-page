@@ -15,11 +15,11 @@ public class CardChartService {
     @Autowired
     private CardRepository cardRepository;
 
-    public List<CardEventCount> getCardCountByDay(String action, LocalDateTime startTime, LocalDateTime endTime) {
+    public List<CardEventCount> getCardCountByHour(String action, LocalDateTime startTime, LocalDateTime endTime) {
         return cardRepository.findByActionAndChartTimeBetween(action, startTime, endTime);
     }
 
-    public List<CardEventCount> getCardCountByWeek(String action, LocalDateTime startTime, LocalDateTime endTime) {
+    public List<CardEventCount> getCardCountByDay(String action, LocalDateTime startTime, LocalDateTime endTime) {
         // JPA 메서드 호출하여 1시간 간격의 데이터를 가져옴
         List<CardEventCount> actionDataByHour = cardRepository.findByActionAndChartTimeBetween(action, startTime, endTime);
 

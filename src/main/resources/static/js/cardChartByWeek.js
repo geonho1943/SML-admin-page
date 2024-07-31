@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         },
                         title: {
                             display: true,
-                            text: 'week'
+                            text: '7Days'
                         },
                         ticks: {
                             source: 'data',

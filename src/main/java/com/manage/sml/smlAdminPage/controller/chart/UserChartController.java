@@ -22,7 +22,7 @@ public class UserChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return userChartService.getUserCountByDay("login", startTime, endTime);
+        return userChartService.getUserCountByHour("login", startTime, endTime);
     }
 
     @GetMapping("/register-count/day")
@@ -31,7 +31,7 @@ public class UserChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return userChartService.getUserCountByDay("register", startTime, endTime);
+        return userChartService.getUserCountByHour("register", startTime, endTime);
     }
 
     @GetMapping("/unregister-count/day")
@@ -40,7 +40,7 @@ public class UserChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return userChartService.getUserCountByDay("unregister", startTime, endTime);
+        return userChartService.getUserCountByHour("unregister", startTime, endTime);
     }
 
     @GetMapping("/deactivate-count/day")
@@ -49,7 +49,7 @@ public class UserChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return userChartService.getUserCountByDay("deactivate", startTime, endTime);
+        return userChartService.getUserCountByHour("deactivate", startTime, endTime);
     }
 
     @GetMapping("/login-count/week")
@@ -58,7 +58,7 @@ public class UserChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return userChartService.getUserCountByWeek("login", startTime, endTime);
+        return userChartService.getUserCountByDay("login", startTime, endTime);
     }
 
     @GetMapping("/register-count/week")
@@ -67,7 +67,7 @@ public class UserChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return userChartService.getUserCountByWeek("register", startTime, endTime);
+        return userChartService.getUserCountByDay("register", startTime, endTime);
     }
 
     @GetMapping("/unregister-count/week")
@@ -76,7 +76,7 @@ public class UserChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return userChartService.getUserCountByWeek("unregister", startTime, endTime);
+        return userChartService.getUserCountByDay("unregister", startTime, endTime);
     }
 
     @GetMapping("/deactivate-count/week")
@@ -85,7 +85,43 @@ public class UserChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return userChartService.getUserCountByWeek("deactivate", startTime, endTime);
+        return userChartService.getUserCountByDay("deactivate", startTime, endTime);
+    }
+
+    @GetMapping("/login-count/month")
+    public List<UserEventCount> getLoginCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return userChartService.getUserCountByDay("login", startTime, endTime);
+    }
+
+    @GetMapping("/register-count/month")
+    public List<UserEventCount> getRegisterCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return userChartService.getUserCountByDay("register", startTime, endTime);
+    }
+
+    @GetMapping("/unregister-count/month")
+    public List<UserEventCount> getUnregisterCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return userChartService.getUserCountByDay("unregister", startTime, endTime);
+    }
+
+    @GetMapping("/deactivate-count/month")
+    public List<UserEventCount> getBlockCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return userChartService.getUserCountByDay("deactivate", startTime, endTime);
     }
 
 }

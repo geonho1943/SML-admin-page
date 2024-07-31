@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     // axios 요청들을 병렬로 처리하여 모든 데이터를 가져옴
     axios.all([
-        axios.get('http://localhost:8080/api/chart/playlists/check-count/week'),
-        axios.get('http://localhost:8080/api/chart/playlists/create-count/week'),
-        axios.get('http://localhost:8080/api/chart/playlists/delete-count/week'),
-        axios.get('http://localhost:8080/api/chart/playlists/deactivate-count/week')
+        axios.get('http://localhost:8080/api/chart/playlists/check-count/month'),
+        axios.get('http://localhost:8080/api/chart/playlists/create-count/month'),
+        axios.get('http://localhost:8080/api/chart/playlists/delete-count/month'),
+        axios.get('http://localhost:8080/api/chart/playlists/deactivate-count/month')
     ])
     .then(axios.spread((checkResponse, createResponse, deleteResponse, deactivateResponse) => {
             // 각 API에서 받은 데이터를 변수에 저장
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const deactivateCounts = deactivateData.map(item => item.activeCount);
 
             // Chart.js 구성
-            const ctx = document.getElementById('playlistChartByWeek').getContext('2d');
+            const ctx = document.getElementById('playlistChartByMonth').getContext('2d');
             new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             },
                             title: {
                                 display: true,
-                                text: '7Days'
+                                text: 'Month'
                             },
                             ticks: {
                                 source: 'data',

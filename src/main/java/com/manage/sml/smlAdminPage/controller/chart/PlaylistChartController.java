@@ -25,7 +25,7 @@ public class PlaylistChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return playlistChartService.getPlaylistCountByDay("check", startTime, endTime);
+        return playlistChartService.getPlaylistCountByHour("check", startTime, endTime);
     }
 
     @GetMapping("/create-count/day")
@@ -34,7 +34,7 @@ public class PlaylistChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return playlistChartService.getPlaylistCountByDay("create", startTime, endTime);
+        return playlistChartService.getPlaylistCountByHour("create", startTime, endTime);
     }
     @GetMapping("/delete-count/day")
     public List<PlaylistEventCount> getDeleteCountInfoByDay(
@@ -42,7 +42,7 @@ public class PlaylistChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return playlistChartService.getPlaylistCountByDay("delete", startTime, endTime);
+        return playlistChartService.getPlaylistCountByHour("delete", startTime, endTime);
     }
     @GetMapping("/deactivate-count/day")
     public List<PlaylistEventCount> getDeactivateCountInfoByDay(
@@ -50,7 +50,7 @@ public class PlaylistChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusDays(1);
-        return playlistChartService.getPlaylistCountByDay("deactivate", startTime, endTime);
+        return playlistChartService.getPlaylistCountByHour("deactivate", startTime, endTime);
     }
 
     @GetMapping("/check-count/week")
@@ -59,7 +59,7 @@ public class PlaylistChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return playlistChartService.getPlaylistCountByWeek("check", startTime, endTime);
+        return playlistChartService.getPlaylistCountByDay("check", startTime, endTime);
     }
 
     @GetMapping("/create-count/week")
@@ -68,7 +68,7 @@ public class PlaylistChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return playlistChartService.getPlaylistCountByWeek("create", startTime, endTime);
+        return playlistChartService.getPlaylistCountByDay("create", startTime, endTime);
     }
     @GetMapping("/delete-count/week")
     public List<PlaylistEventCount> getDeleteCountInfoByWeek(
@@ -76,7 +76,7 @@ public class PlaylistChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return playlistChartService.getPlaylistCountByWeek("delete", startTime, endTime);
+        return playlistChartService.getPlaylistCountByDay("delete", startTime, endTime);
     }
     @GetMapping("/deactivate-count/week")
     public List<PlaylistEventCount> getDeactivateCountInfoByWeek(
@@ -84,6 +84,40 @@ public class PlaylistChartController {
             LocalDateTime endTime) {
         if (endTime == null) endTime = LocalDateTime.now();
         LocalDateTime startTime = endTime.minusWeeks(1);
-        return playlistChartService.getPlaylistCountByWeek("deactivate", startTime, endTime);
+        return playlistChartService.getPlaylistCountByDay("deactivate", startTime, endTime);
+    }
+
+    @GetMapping("/check-count/month")
+    public List<PlaylistEventCount> getCheckCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return playlistChartService.getPlaylistCountByDay("check", startTime, endTime);
+    }
+
+    @GetMapping("/create-count/month")
+    public List<PlaylistEventCount> getCreateCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return playlistChartService.getPlaylistCountByDay("create", startTime, endTime);
+    }
+    @GetMapping("/delete-count/month")
+    public List<PlaylistEventCount> getDeleteCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return playlistChartService.getPlaylistCountByDay("delete", startTime, endTime);
+    }
+    @GetMapping("/deactivate-count/month")
+    public List<PlaylistEventCount> getDeactivateCountInfoByMonth(
+            @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime endTime) {
+        if (endTime == null) endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minusMonths(1);
+        return playlistChartService.getPlaylistCountByDay("deactivate", startTime, endTime);
     }
 }
