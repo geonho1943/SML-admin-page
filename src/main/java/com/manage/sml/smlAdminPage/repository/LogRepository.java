@@ -8,4 +8,7 @@ import java.util.List;
 
 public interface LogRepository extends JpaRepository<EventLog, Integer> {
     List<EventLog> findAllByActiveRegBetween(LocalDateTime startTime, LocalDateTime endTime);
+
+    List<EventLog> findByUserIdxAndActiveTypeStartingWithAndActiveRegBetween(Integer objIdx, String activeType, LocalDateTime startTime, LocalDateTime endTime);
+
 }
