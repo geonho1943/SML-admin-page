@@ -1,68 +1,205 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>SML 관리자페이지</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 대시보드</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0"></script>
-    <script src="js/userChartByDay.js"></script>
-    <script src="js/cardChartByDay.js"></script>
-    <script src="js/playlistChartByDay.js"></script>
-    <script src="js/userChartByWeek.js"></script>
-    <script src="js/cardChartByWeek.js"></script>
-    <script src="js/playlistChartByWeek.js"></script>
-    <script src="js/userChartByMonth.js"></script>
-    <script src="js/cardChartByMonth.js"></script>
-    <script src="js/playlistChartByMonth.js"></script>
+    <script src="js/chart/userChartByDay.js"></script>
+    <script src="js/chart/cardChartByDay.js"></script>
+    <script src="js/chart/playlistChartByDay.js"></script>
+    <script src="js/chart/userChartByWeek.js"></script>
+    <script src="js/chart/cardChartByWeek.js"></script>
+    <script src="js/chart/playlistChartByWeek.js"></script>
+    <script src="js/chart/userChartByMonth.js"></script>
+    <script src="js/chart/cardChartByMonth.js"></script>
+    <script src="js/chart/playlistChartByMonth.js"></script>
+    <script src="js/chart/searchChart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        canvas {
+            max-height: 400px;
+        }
+    </style>
 </head>
-<body>
-<!--data-bs-theme="dark"-->
-<div class="container">
-    <h2 class="text-center">SML admin page</h2>
-    <h4 class="my-4">주간 차트</h4>
-    <div class="row">
-        <div class="col-4">
-            <canvas id="userChartByWeek"></canvas>
-        </div>
-        <div class="col-4">
-            <canvas id="cardChartByWeek"></canvas>
-        </div>
-        <div class="col-4">
-            <canvas id="playlistChartByWeek"></canvas>
+<body class="bg-light">
+    <div class="container-fluid">
+        <div class="row p-3">
+            <!-- 고정된 사이드바 -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse show">
+                <div class="position-sticky pt-3">
+                    <h4 class="text-center">SML admin page</h4>
+                    <button id="darkModeToggle" class="btn btn-outline-secondary w-100 mb-3">dark / light mode</button>
+                    <input class="form-control mb-3" type="search" placeholder="차트 검색" aria-label="검색">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="#" data-target="userChart">User Chart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="#" data-target="playlistChart">Playlist Chart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="#" data-target="cardChart">Card Chart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="#" data-target="searchChart">Search Chart</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- 메인 차트 -->
+            <main id="content" class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
+                <div id="userChart" class="content-section active">
+                    <h3 class="p-3 pt-4">유저 통계</h3>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">24시간</h5>
+                            <canvas id="userChartByDay"></canvas>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">7일</h5>
+                            <canvas id="userChartByWeek"></canvas>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">한 달</h5>
+                            <canvas id="userChartByMonth"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="playlistChart" class="content-section">
+                    <h3 class="p-3 pt-4">플레이리스트 통계</h3>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">24시간</h5>
+                            <canvas id="playlistChartByDay"></canvas>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">7일</h5>
+                            <canvas id="playlistChartByWeek"></canvas>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">한 달</h5>
+                            <canvas id="playlistChartByMonth"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cardChart" class="content-section">
+                    <h3 class="p-3 pt-4">카드 통계</h3>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">24시간</h5>
+                            <canvas id="cardChartByDay"></canvas>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">7일</h5>
+                            <canvas id="cardChartByWeek"></canvas>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">한 달</h5>
+                            <canvas id="cardChartByMonth"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="searchChart" class="content-section">
+                    <h3 class="p-3 pt-4">차트 검색</h3>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">옵션 선택</h5>
+                            <!-- 옵션 선택 드롭다운 및 입력 필드 -->
+                            <form id="searchChartForm">
+                                <div class="mb-3">
+                                    <label for="domainSelect" class="form-label">도메인 선택</label>
+                                    <select id="domainSelect" class="form-select">
+                                        <option value="user">User</option>
+                                        <option value="card">Card</option>
+                                        <option value="playlist">Playlist</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="chartTypeSelect" class="form-label">차트 종류 선택</label>
+                                    <select id="chartTypeSelect" class="form-select">
+                                        <option value="day">24시간</option>
+                                        <option value="week">7일</option>
+                                        <option value="month">한 달</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="endTimeInput" class="form-label">종료 시간 선택</label>
+                                    <input type="datetime-local" id="endTimeInput" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="objectIdxInput" class="form-label">대상의 Idx 선택</label>
+                                    <input type="number" id="objectIdxInput" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">차트 로드</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">차트 결과</h5>
+                            <canvas id="searchChartResult"></canvas>
+                        </div>
+                    </div>
+                </div>
+                    
+
+            </main>
         </div>
     </div>
 
-    <h4 class="my-4">일일 차트</h4>
-    <div class="row">
-        <div class="col-4">
-            <canvas id="userChartByDay"></canvas>
-        </div>
-        <div class="col-4">
-            <canvas id="cardChartByDay"></canvas>
-        </div>
-        <div class="col-4">
-            <canvas id="playlistChartByDay"></canvas>
-        </div>
-    </div>
-
-    <h4 class="my-4">월간 차트</h4>
-    <div class="row">
-        <div class="col-6">
-            <canvas id="userChartByMonth"></canvas>
-        </div>
-        <div class="col-6">
-            <canvas id="cardChartByMonth"></canvas>
-        </div>
-        <div class="col-6">
-            <canvas id="playlistChartByMonth"></canvas>
-        </div>
-    </div>
-
-</div>
+    <script>
+        // 네비게이션 클릭 섹션만 보이도록 활성화
+        document.querySelectorAll('#sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = this.getAttribute('data-target');
+                // 모든 섹션 숨기기
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                // 선택된 섹션만 보이도록 설정
+                document.getElementById(target).classList.add('active');
+            });
+        });
+            // 다크 모드 전환
+    const toggleDarkMode = () => {
+            document.body.classList.toggle('bg-dark');
+            document.body.classList.toggle('text-light');
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.toggle('bg-dark');
+                card.classList.toggle('text-light');
+            });
+            document.querySelector('#sidebar').classList.toggle('bg-dark');
+            document.querySelector('#sidebar').classList.toggle('border-end-light');
+        }
+        document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+    </script>
 </body>
 </html>
